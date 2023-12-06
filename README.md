@@ -1,8 +1,8 @@
 # chriscdn/build-url
 
-## Motivation
-
 A small utility for generating URLs.
+
+## Motivation
 
 This package is a fork of [@googlicius/build-url](https://github.com/googlicius/build-url). Full credit to googlicius for the concept, source code, and documentation. 👍
 
