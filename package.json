@@ -1,0 +1,22 @@
+{
+  "name": "@chriscdn/build-url",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "source": "./src/index.ts",
+  "main": "./lib/build-url.cjs",
+  "module": "./lib/build-url.module.js",
+  "unpkg": "./lib/build-url.umd.js",
+  "exports": {
+    "require": "./lib/build-url.cjs",
+    "default": "./lib/build-url.modern.js"
+  },
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "build": "rm -rf ./lib/ && microbundle",
+    "dev": "microbundle watch"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.1"
+  }
+}
