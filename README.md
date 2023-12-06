@@ -4,7 +4,7 @@
 
 A small utility for generating URLs.
 
-This package is a fork of [@googlicius/build-url](https://github.com/googlicius/build-url). Full credit to googlicius for the concept, source code and documentation. 👍
+This package is a fork of [@googlicius/build-url](https://github.com/googlicius/build-url). Full credit to googlicius for the concept, source code, and documentation. 👍
 
 I forked this package for two reasons:
 
