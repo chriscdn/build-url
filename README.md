@@ -1,26 +1,28 @@
 # chriscdn/build-url
 
-A helper to build url with query params as easy way. Helpful when your application routing or state management based on URL query params.
+## Motivation
 
-This package is a fork of [@googlicius/build-url](https://github.com/googlicius/build-url). Full credit to the author for the code and documentation.
+A small utility for generating URLs.
+
+This package is a fork of [@googlicius/build-url](https://github.com/googlicius/build-url). Full credit to googlicius for the concept, source code and documentation. 👍
 
 I forked this package for two reasons:
 
 - to provide an ES6 build, and
 - to fix [this issue](https://github.com/googlicius/build-url/issues/3).
 
----
-
 ## Installation
 
-```sh
-npm install @googlicius/build-url
+Using npm:
+
+```bash
+$ npm install https://github.com/chriscdn/build-url
 ```
 
-Or Yarn:
+Using yarn:
 
-```sh
-yarn add @googlicius/build-url
+```bash
+$ yarn add https://github.com/chriscdn/build-url
 ```
 
 ## Usage
@@ -37,7 +39,7 @@ buildUrl("http://my-website.com/post", {
 // Output: http://my-website.com/post?page=2
 ```
 
-Add another query param:
+Add another query parameter:
 
 ```js
 buildUrl("http://my-website.com/post?page=2", {
@@ -61,7 +63,7 @@ buildUrl({
 // Output: /?sort=title%3Aasc
 ```
 
-Remove a query param:
+Remove a query parameter:
 
 ```js
 buildUrl("images?page=2&sort=title:asc", {
