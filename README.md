@@ -27,6 +27,8 @@ yarn add https://github.com/chriscdn/build-url
 
 ## Usage
 
+Create a url:
+
 ```js
 import buildUrl from "@googlicius/build-url";
 
@@ -75,7 +77,7 @@ buildUrl("images?page=2&sort=title:asc", {
 // Output: /images?sort=title%3Aasc
 ```
 
-Always returns absolute url:
+Return an absolute url:
 
 ```js
 // Assume that current url is: http://awesome-website.com
