@@ -1,6 +1,6 @@
 # chriscdn/build-url
 
-A small utility for generating URLs.
+A small utility for building URLs.
 
 ## Motivation
 
