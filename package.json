@@ -4,19 +4,23 @@
   "license": "MIT",
   "type": "module",
   "source": "./src/index.ts",
-  "main": "./lib/build-url.cjs",
-  "module": "./lib/build-url.module.js",
-  "unpkg": "./lib/build-url.umd.js",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.module.js",
+  "unpkg": "./lib/index.umd.js",
   "exports": {
-    "require": "./lib/build-url.cjs",
-    "default": "./lib/build-url.modern.js"
+    "require": "./lib/index.cjs",
+    "default": "./lib/index.modern.js"
   },
   "types": "./lib/index.d.ts",
   "scripts": {
     "build": "rm -rf ./lib/ && microbundle",
-    "dev": "microbundle watch"
+    "dev": "microbundle watch",
+    "test": "jest"
   },
   "devDependencies": {
-    "microbundle": "^0.15.1"
+    "@types/jest": "^29.5.11",
+    "jest": "^29.7.0",
+    "microbundle": "^0.15.1",
+    "ts-jest": "^29.1.1"
   }
 }

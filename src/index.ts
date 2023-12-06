@@ -3,9 +3,12 @@ export interface UrlOptions {
     [x: string]: any;
   };
   hash?: string;
-  path?: string;
+  path?: string | null;
   returnAbsoluteUrl?: boolean;
 }
+
+const isEmpty = (value: any) => value === null || value === undefined;
+// ||(typeof value === "string" && value.trim().length === 0);
 
 export default function buildUrl(
   inputUrl?: string | UrlOptions,
@@ -40,7 +43,8 @@ export default function buildUrl(
     for (const key in _options.queryParams) {
       if (Object.prototype.hasOwnProperty.call(_options.queryParams, key)) {
         const element = _options.queryParams[key];
-        if (!element) {
+
+        if (isEmpty(element)) {
           url.searchParams.delete(key);
         } else {
           url.searchParams.set(key, element);

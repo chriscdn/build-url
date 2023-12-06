@@ -3,7 +3,7 @@ export interface UrlOptions {
         [x: string]: any;
     };
     hash?: string;
-    path?: string;
+    path?: string | null;
     returnAbsoluteUrl?: boolean;
 }
 export default function buildUrl(inputUrl?: string | UrlOptions, options?: UrlOptions): string;
