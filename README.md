@@ -30,7 +30,7 @@ yarn add @chriscdn/build-url
 Create a url:
 
 ```js
-import buildUrl from "@googlicius/build-url";
+import buildUrl from "@chriscdn/build-url";
 
 buildUrl("http://my-website.com/post", {
   queryParams: {
