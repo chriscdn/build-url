@@ -1,4 +1,4 @@
-# chriscdn/build-url
+# @chriscdn/build-url
 
 A small utility for building URLs.
 
@@ -16,13 +16,13 @@ I forked this package for two reasons:
 Using npm:
 
 ```bash
-npm install https://github.com/chriscdn/build-url
+npm install @chriscdn/build-url
 ```
 
 Using yarn:
 
 ```bash
-yarn add https://github.com/chriscdn/build-url
+yarn add @chriscdn/build-url
 ```
 
 ## Usage
