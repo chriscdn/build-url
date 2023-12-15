@@ -1,19 +1,19 @@
 {
-  "name": "@chriscdn/build-url",
-  "version": "1.0.4",
+  "name": "@chriscdn/build-url.",
+  "version": "1.0.5",
   "description": "A small utility for building URLs.",
-  "repository": "https://github.com/chriscdn/build-url",
+  "repository": "https://github.com/chriscdn/build-url.",
   "author": "Christopher Meyer <chris@schwiiz.org>",
   "license": "MIT",
   "type": "module",
-  "source": "./src/index.ts",
-  "main": "./lib/index.cjs",
-  "module": "./lib/index.module.js",
-  "unpkg": "./lib/index.umd.js",
+  "source": "src/index.ts",
   "exports": {
-    "require": "./lib/index.cjs",
-    "default": "./lib/index.modern.js"
+    "require": "./lib/build-url.cjs",
+    "default": "./lib/build-url.modern.js"
   },
+  "main": "./lib/build-url.cjs",
+  "module": "./lib/build-url.module.js",
+  "unpkg": "./lib/build-url.umd.js",
   "types": "./lib/index.d.ts",
   "scripts": {
     "build": "rm -rf ./lib/ && microbundle",
