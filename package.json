@@ -1,8 +1,8 @@
 {
   "name": "@chriscdn/build-url",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A small utility for building URLs.",
-  "repository": "https://github.com/chriscdn/build-url.",
+  "repository": "https://github.com/chriscdn/build-url",
   "author": "Christopher Meyer <chris@schwiiz.org>",
   "license": "MIT",
   "type": "module",
