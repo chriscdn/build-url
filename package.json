@@ -1,6 +1,6 @@
 {
   "name": "@chriscdn/build-url",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A small utility for building URLs.",
   "repository": "https://github.com/chriscdn/build-url",
   "author": "Christopher Meyer <chris@schwiiz.org>",
@@ -8,6 +8,7 @@
   "type": "module",
   "source": "src/index.ts",
   "exports": {
+    "types": "./lib/index.d.ts",
     "require": "./lib/build-url.cjs",
     "default": "./lib/build-url.modern.js"
   },
