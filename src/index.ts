@@ -12,7 +12,7 @@ const isEmpty = (value: any) => value === null || value === undefined;
 
 export default function buildUrl(
   inputUrl?: string | UrlOptions,
-  options?: UrlOptions
+  options?: UrlOptions,
 ) {
   let url: URL;
   let isValidInputUrl = false;

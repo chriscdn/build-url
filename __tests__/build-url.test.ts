@@ -1,3 +1,4 @@
+import { describe, test, expect } from "vitest";
 import buildUrl from "../src/index";
 
 describe("Build Url test", () => {
@@ -124,5 +125,13 @@ describe("Build Url test", () => {
 
     expect(url).toEqual("/?page=2");
     expect(url2).toEqual("http://my-website.com/?page=2");
+  });
+
+  test("only query params", () => {
+    const url = buildUrl({
+      queryParams: { a: 123 },
+    });
+
+    expect(url).toBe("/?a=123");
   });
 });
