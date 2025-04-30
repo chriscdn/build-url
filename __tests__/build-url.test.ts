@@ -1,5 +1,5 @@
-import { describe, test, expect } from "vitest";
-import buildUrl from "../src/index";
+import { describe, expect, test } from "vitest";
+import { buildUrl } from "../src/index";
 
 describe("Build Url test", () => {
   test("Add a query param", () => {

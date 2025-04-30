@@ -1,19 +1,19 @@
-export interface UrlOptions {
+export type UrlOptions = {
   queryParams?: {
     [x: string]: any;
   };
   hash?: string;
   path?: string | null;
   returnAbsoluteUrl?: boolean;
-}
+};
 
 const isEmpty = (value: any) => value === null || value === undefined;
 // ||(typeof value === "string" && value.trim().length === 0);
 
-export default function buildUrl(
+export const buildUrl = (
   inputUrl?: string | UrlOptions,
   options?: UrlOptions,
-) {
+) => {
   let url: URL;
   let isValidInputUrl = false;
 
@@ -23,17 +23,15 @@ export default function buildUrl(
     isValidInputUrl = true;
 
     if (typeof inputUrl === "string") {
-      const host =
-        typeof window === "undefined"
-          ? "http://example.com"
-          : window.location.origin;
+      const host = typeof window === "undefined"
+        ? "http://example.com"
+        : window.location.origin;
 
       url = new URL(`${host}/${inputUrl.replace(/^\/|\/$/g, "")}`);
     } else {
-      url =
-        typeof window === "undefined"
-          ? new URL("http://example.com")
-          : new URL(window.location.href);
+      url = typeof window === "undefined"
+        ? new URL("http://example.com")
+        : new URL(window.location.href);
     }
   }
 
@@ -70,4 +68,4 @@ export default function buildUrl(
   }
 
   return url.toString();
-}
+};

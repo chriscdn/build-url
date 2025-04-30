@@ -6,10 +6,11 @@ A small utility for building URLs.
 
 This package is a fork of [@googlicius/build-url](https://github.com/googlicius/build-url). Full credit to googlicius for the concept, source code, and documentation. 👍
 
-I forked this package for two reasons:
+I forked this package for three reasons:
 
-- to provide an ES6 build, and
-- to fix [this issue](https://github.com/googlicius/build-url/issues/3).
+- to provide an ES6 build,
+- to fix [this issue](https://github.com/googlicius/build-url/issues/3), and
+- to provide a named export.
 
 ## Installation
 
@@ -30,7 +31,7 @@ yarn add @chriscdn/build-url
 Create a url:
 
 ```js
-import buildUrl from "@chriscdn/build-url";
+import { buildUrl } from "@chriscdn/build-url";
 
 buildUrl("http://my-website.com/post", {
   queryParams: {
