@@ -10,7 +10,7 @@ export type UrlOptions = {
 const isEmpty = (value: any) => value === null || value === undefined;
 // ||(typeof value === "string" && value.trim().length === 0);
 
-export const buildUrl = (
+const buildUrl = (
   inputUrl?: string | UrlOptions,
   options?: UrlOptions,
 ) => {
@@ -69,3 +69,5 @@ export const buildUrl = (
 
   return url.toString();
 };
+
+export { buildUrl };

@@ -6,4 +6,5 @@ export type UrlOptions = {
     path?: string | null;
     returnAbsoluteUrl?: boolean;
 };
-export declare const buildUrl: (inputUrl?: string | UrlOptions, options?: UrlOptions) => string;
+declare const buildUrl: (inputUrl?: string | UrlOptions, options?: UrlOptions) => string;
+export { buildUrl };
