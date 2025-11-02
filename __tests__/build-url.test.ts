@@ -107,6 +107,7 @@ describe("Build Url test", () => {
     const url = buildUrl("posts?page=2", {
       path: "stories",
     });
+
     const url2 = buildUrl("http://my-website.com/posts?page=2", {
       path: "stories",
     });

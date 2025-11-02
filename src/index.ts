@@ -8,7 +8,6 @@ export type UrlOptions = {
 };
 
 const isEmpty = (value: any) => value === null || value === undefined;
-// ||(typeof value === "string" && value.trim().length === 0);
 
 const buildUrl = (
   inputUrl?: string | UrlOptions,
