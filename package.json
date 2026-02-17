@@ -17,7 +17,7 @@
   "unpkg": "./lib/build-url.umd.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "build": "rm -rf ./lib/ && microbundle",
+    "build": "rm -rf ./lib/ && microbundle --no-compress",
     "dev": "microbundle watch",
     "test": "vitest"
   },
