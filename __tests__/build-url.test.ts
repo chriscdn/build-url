@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { buildUrl } from "../src/index";
+import { buildUrl } from "../lib";
 
 describe("Build Url test", () => {
   test("Add a query param", () => {
