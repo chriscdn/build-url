@@ -95,4 +95,4 @@ buildUrl("/posts", {
 
 ## License
 
-MIT
+[MIT](LICENSE)
