@@ -8,7 +8,7 @@ This package is a fork of [@googlicius/build-url](https://github.com/googlicius/
 
 I forked this package for three reasons:
 
-- to provide an ES6 build,
+- to provide an ESM build,
 - to fix [this issue](https://github.com/googlicius/build-url/issues/3), and
 - to provide a named export.
 
@@ -30,7 +30,7 @@ yarn add @chriscdn/build-url
 
 Create a url:
 
-```js
+```ts
 import { buildUrl } from "@chriscdn/build-url";
 
 buildUrl("http://my-website.com/post", {
@@ -44,7 +44,7 @@ buildUrl("http://my-website.com/post", {
 
 Add another query parameter:
 
-```js
+```ts
 buildUrl("http://my-website.com/post?page=2", {
   queryParams: {
     sort: "title:asc",
@@ -56,7 +56,7 @@ buildUrl("http://my-website.com/post?page=2", {
 
 Input url/path is omitted:
 
-```js
+```ts
 buildUrl({
   queryParams: {
     sort: "title:asc",
@@ -68,7 +68,7 @@ buildUrl({
 
 Remove a query parameter:
 
-```js
+```ts
 buildUrl("images?page=2&sort=title:asc", {
   queryParams: {
     page: null,
@@ -80,7 +80,7 @@ buildUrl("images?page=2&sort=title:asc", {
 
 Return an absolute url:
 
-```js
+```ts
 // Assume that current url is: http://awesome-website.com
 
 buildUrl("/posts", {
