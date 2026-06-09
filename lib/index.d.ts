@@ -8,4 +8,11 @@ type UrlOptions = {
 };
 declare const buildUrl: (inputUrl?: string | UrlOptions, options?: UrlOptions) => string;
 
-export { type UrlOptions, buildUrl };
+type SlashBehavior = boolean | "preserve";
+type JoinUrlPathOptions = {
+    leading?: SlashBehavior;
+    trailing?: SlashBehavior;
+};
+declare const joinUrlPath: (segments: Array<string | number>, { leading, trailing }?: JoinUrlPathOptions) => string;
+
+export { buildUrl, joinUrlPath };

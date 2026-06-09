@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { buildUrl } from "../src";
+import { buildUrl, joinUrlPath } from "../src";
 
 describe("Build Url test", () => {
   test("Add a query param", () => {
@@ -134,5 +134,32 @@ describe("Build Url test", () => {
     });
 
     expect(url).toBe("/?a=123");
+  });
+});
+
+describe("joinUrlPath", () => {
+  test("basic", () => {
+    expect(joinUrlPath(["hello", 2])).toBe("hello/2");
+    expect(joinUrlPath(["id", 2])).toBe("id/2");
+    expect(joinUrlPath(["/id", 2])).toBe("/id/2");
+    expect(joinUrlPath(["/id", 2, ""])).toBe("/id/2/");
+    expect(joinUrlPath(["/id", 2], { trailing: true })).toBe("/id/2/");
+    expect(joinUrlPath(["/id", 2], { leading: true, trailing: true })).toBe(
+      "/id/2/",
+    );
+    expect(joinUrlPath(["/id", 2], { leading: false, trailing: true })).toBe(
+      "id/2/",
+    );
+    expect(joinUrlPath(["/id/hello"])).toBe("/id/hello");
+    expect(joinUrlPath(["/id/hello"], { trailing: true })).toBe("/id/hello/");
+    expect(joinUrlPath(["/id/hello"], { trailing: true })).toBe("/id/hello/");
+    expect(joinUrlPath(["/id/hello"], { leading: false })).toBe("id/hello");
+  });
+
+  test("edge cases", () => {
+    expect(joinUrlPath([""], { leading: true, trailing: true })).toBe("/");
+    expect(joinUrlPath([""])).toBe("");
+    expect(joinUrlPath([], { trailing: true })).toBe("/");
+    expect(joinUrlPath([], { leading: true, trailing: true })).toBe("/");
   });
 });

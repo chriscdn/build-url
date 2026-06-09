@@ -26,7 +26,7 @@ Using yarn:
 yarn add @chriscdn/build-url
 ```
 
-## Usage
+## Usage - buildUrl
 
 Create a url:
 
@@ -91,6 +91,19 @@ buildUrl("/posts", {
 });
 
 // Output: http://awesome-website.com/posts?page=2
+```
+
+## Usage - joinUrlPath
+
+The **`joinUrlPath(segments, options?)`** function joins an array of path segments into a clean URL path, collapsing redundant slashes between segments. By default it _preserves_ the leading slash of the first segment and the trailing slash of the last segment (`"preserve"`), but both can be forced on (`true`) or stripped (`false`) via the `leading` and `trailing` options. Segments can be strings or numbers.
+
+```ts
+import { joinUrlPath } from "@chriscdn/build-url";
+
+joinUrlPath(["api", "users", 42]); // "api/users/42"
+joinUrlPath(["/api/", "/users/", "/42/"]); // "/api/users/42/"
+joinUrlPath(["/api/", "users"], { trailing: true }); // "/api/users/"
+joinUrlPath(["/api/", "users"], { leading: false }); // "api/users"
 ```
 
 ## License
