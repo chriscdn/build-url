@@ -1,13 +1,16 @@
+type QueryParam = string | number | null | undefined;
+
 type UrlOptions = {
-  queryParams?: {
-    [x: string]: any;
-  };
+  queryParams?: Record<string, QueryParam | QueryParam[]>;
   hash?: string;
   path?: string | null;
   returnAbsoluteUrl?: boolean;
 };
 
-const isEmpty = (value: any) => value === null || value === undefined;
+const isNullOrUndefined = (value: unknown) =>
+  value === null || value === undefined;
+
+const isDefined = (value: unknown) => !isNullOrUndefined(value);
 
 const buildUrl = (inputUrl?: string | UrlOptions, options?: UrlOptions) => {
   let url: URL;
@@ -35,19 +38,19 @@ const buildUrl = (inputUrl?: string | UrlOptions, options?: UrlOptions) => {
 
   const _options = typeof inputUrl === "string" ? options : inputUrl;
 
-  if (_options?.queryParams) {
-    for (const key in _options.queryParams) {
-      if (Object.prototype.hasOwnProperty.call(_options.queryParams, key)) {
-        const element = _options.queryParams[key];
-
-        if (isEmpty(element)) {
-          url.searchParams.delete(key);
-        } else {
-          url.searchParams.set(key, element);
+  Object.entries(_options?.queryParams ?? {}).forEach(([key, element]) => {
+    if (isNullOrUndefined(element)) {
+      url.searchParams.delete(key);
+    } else if (Array.isArray(element)) {
+      element.forEach((ele) => {
+        if (isDefined(ele)) {
+          url.searchParams.append(key, String(ele));
         }
-      }
+      });
+    } else {
+      url.searchParams.set(key, String(element));
     }
-  }
+  });
 
   if (_options?.path) {
     url.pathname = _options.path;
@@ -63,9 +66,9 @@ const buildUrl = (inputUrl?: string | UrlOptions, options?: UrlOptions) => {
 
   if (isValidInputUrl && !_options?.returnAbsoluteUrl) {
     return url.pathname + url.search + url.hash;
+  } else {
+    return url.toString();
   }
-
-  return url.toString();
 };
 
 export { buildUrl };

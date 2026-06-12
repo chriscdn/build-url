@@ -135,9 +135,23 @@ describe("Build Url test", () => {
 
     expect(url).toBe("/?a=123");
   });
+
+  test("multiple", () => {
+    const url = buildUrl({
+      queryParams: { a: [123, 111, null] },
+    });
+
+    expect(url).toBe("/?a=123&a=111");
+  });
 });
 
 describe("joinUrlPath", () => {
+  test("basic", () => {
+    expect(joinUrlPath(["hello"])).toBe("hello");
+    expect(joinUrlPath(["hello"], { leading: true })).toBe("/hello");
+    expect(joinUrlPath(["hello"], { trailing: true })).toBe("hello/");
+  });
+
   test("basic", () => {
     expect(joinUrlPath(["hello", 2])).toBe("hello/2");
     expect(joinUrlPath(["id", 2])).toBe("id/2");

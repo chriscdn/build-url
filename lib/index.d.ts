@@ -1,7 +1,6 @@
+type QueryParam = string | number | null | undefined;
 type UrlOptions = {
-    queryParams?: {
-        [x: string]: any;
-    };
+    queryParams?: Record<string, QueryParam | QueryParam[]>;
     hash?: string;
     path?: string | null;
     returnAbsoluteUrl?: boolean;
