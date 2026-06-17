@@ -1,4 +1,4 @@
-type QueryParam = string | number | null | undefined;
+type QueryParam = boolean | string | number | null | undefined;
 type UrlOptions = {
     queryParams?: Record<string, QueryParam | QueryParam[]>;
     hash?: string;
