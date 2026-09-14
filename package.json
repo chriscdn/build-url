@@ -6,19 +6,23 @@
   "author": "Christopher Meyer <chris@schwiiz.org>",
   "license": "MIT",
   "type": "module",
-  "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "exports": "./lib/index.js",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    }
+  },
   "scripts": {
-    "build": "tsup",
-    "watch": "yarn build --watch",
+    "build": "tsdown",
+    "watch": "pnpm build --watch",
     "test": "vitest"
   },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.8",
-    "tsup": "^8.5.1",
-    "typescript": "^5.9.3",
-    "vitest": "^4.1.9"
+    "tsdown": "0.23.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.0"
   },
   "files": [
     "lib"
