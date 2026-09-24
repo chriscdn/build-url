@@ -1,72 +1,79 @@
+import { isDefined, isNull, isNullish, isString } from "@chriscdn/type-guards";
+import { joinUrlPath } from "./join-url-path";
+
 type QueryParam = boolean | string | number | null | undefined;
 
 type UrlOptions = {
   queryParams?: Record<string, QueryParam | QueryParam[]>;
   hash?: string;
   path?: string | null;
+  appendPath?: string;
   returnAbsoluteUrl?: boolean;
 };
 
-const isNullOrUndefined = (value: unknown) =>
-  value === null || value === undefined;
-
-const isDefined = (value: unknown) => !isNullOrUndefined(value);
+const NOOP_URL =
+  typeof window === "undefined" ? "http://example.com" : window.location.origin;
 
 const buildUrl = (inputUrl?: string | UrlOptions, options?: UrlOptions) => {
   let url: URL;
-  let isValidInputUrl = false;
+  let isInvalidInputUrl = false;
 
   try {
     url = new URL(inputUrl as string);
-  } catch (error) {
-    isValidInputUrl = true;
+  } catch {
+    isInvalidInputUrl = true;
 
-    if (typeof inputUrl === "string") {
-      const host =
-        typeof window === "undefined"
-          ? "http://example.com"
-          : window.location.origin;
-
-      url = new URL(`${host}/${inputUrl.replace(/^\/|\/$/g, "")}`);
-    } else {
-      url =
-        typeof window === "undefined"
-          ? new URL("http://example.com")
-          : new URL(window.location.href);
-    }
+    url = isString(inputUrl)
+      ? new URL(joinUrlPath([NOOP_URL, inputUrl]))
+      : new URL(NOOP_URL);
   }
 
-  const _options = typeof inputUrl === "string" ? options : inputUrl;
+  const _options = isString(inputUrl) ? options : inputUrl;
 
   Object.entries(_options?.queryParams ?? {}).forEach(([key, element]) => {
-    if (isNullOrUndefined(element)) {
+    if (isNullish(element)) {
       url.searchParams.delete(key);
     } else if (Array.isArray(element)) {
-      element.forEach((ele) => {
-        if (isDefined(ele)) {
-          url.searchParams.append(key, String(ele));
-        }
-      });
+      url.searchParams.delete(key);
+
+      element
+        .filter(isDefined)
+        .forEach((ele) => url.searchParams.append(key, String(ele)));
     } else {
       url.searchParams.set(key, String(element));
     }
   });
 
-  if (_options?.path) {
+  if (isString(_options?.path)) {
     url.pathname = _options.path;
+  } else if (isNull(_options?.path)) {
+    url.pathname = "";
   }
 
-  if (_options?.path === null) {
-    url.pathname = "";
+  if (_options?.appendPath) {
+    url.pathname = joinUrlPath([url.pathname, _options.appendPath]);
+  }
+
+  // Preserve a trailing slash on non root paths while normalizing duplicate slashes.
+  const hasPathWithTrailingSlash =
+    url.pathname.length > 1 && url.pathname.endsWith("/");
+
+  // Remove duplicate slashes, e.g. /a//b => /a/b.
+  url.pathname = joinUrlPath(url.pathname.split("/"));
+
+  if (hasPathWithTrailingSlash) {
+    url.pathname = url.pathname + "/";
   }
 
   if (_options?.hash) {
     url.hash = _options.hash;
   }
 
-  if (isValidInputUrl && !_options?.returnAbsoluteUrl) {
-    return url.pathname + url.search + url.hash;
+  if (isInvalidInputUrl && !_options?.returnAbsoluteUrl) {
+    // return a relative path
+    return [url.pathname, url.search, url.hash].join("");
   } else {
+    // return an absolute path
     return url.toString();
   }
 };

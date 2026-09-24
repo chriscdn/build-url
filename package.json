@@ -22,9 +22,12 @@
     "@tsconfig/strictest": "^2.0.8",
     "tsdown": "0.23.0",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.1"
   },
   "files": [
     "lib"
-  ]
+  ],
+  "dependencies": {
+    "@chriscdn/type-guards": "^0.0.3"
+  }
 }

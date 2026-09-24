@@ -1,39 +1,51 @@
+import { isStringWithValue } from "@chriscdn/type-guards";
+
 type SlashBehavior = boolean | "preserve";
 
 type JoinUrlPathOptions = {
-  leading?: SlashBehavior; // "preserve" (default) | true = force | false = strip
-  trailing?: SlashBehavior; // "preserve" (default) | true = force | false = strip
+  leading?: SlashBehavior;
+  trailing?: SlashBehavior;
 };
 
-const stripTrailingLeadingSlashes = (item: string) =>
-  item.replace(/^\/+|\/+$/g, "");
-
 const joinUrlPath = (
-  segments: Array<string | number>,
+  segments: readonly (string | number)[],
   { leading = "preserve", trailing = "preserve" }: JoinUrlPathOptions = {},
 ): string => {
-  const segmentsAsStrings = segments.map((segment) => String(segment).trim());
+  const segmentsAsStrings = segments
+    .map((segment) => String(segment).trim())
+    .filter(isStringWithValue);
 
-  const hasLeading = segments.length
-    ? segmentsAsStrings[0]!.startsWith("/")
-    : false;
+  let url = segmentsAsStrings.length
+    ? segmentsAsStrings.reduce(
+        (a, b) => `${a.replace(/\/+$/, "")}/${b.replace(/^\/+/, "")}`,
+      )
+    : "";
 
-  const hasTrailing = segments.length
-    ? segmentsAsStrings[segmentsAsStrings.length - 1]!.endsWith("/")
-    : false;
+  const hasLeading = url.startsWith("/");
 
-  // Collapse consecutive slashes, strip both ends to get a clean core
-  const pathString = segmentsAsStrings
-    .map(stripTrailingLeadingSlashes)
-    .join("/");
+  if (leading !== "preserve") {
+    if (hasLeading && !leading) {
+      url = url.slice(1);
+    } else if (!hasLeading && leading) {
+      url = "/" + url;
+    }
+  }
 
-  const addLeading = leading === "preserve" ? hasLeading : leading;
-  const addTrailing = trailing === "preserve" ? hasTrailing : trailing;
+  const hasTrailing = url.endsWith("/");
 
-  return `${addLeading ? "/" : ""}${pathString}${addTrailing ? "/" : ""}`.replaceAll(
-    "//",
-    "/",
-  );
+  if (trailing !== "preserve") {
+    if (hasTrailing && !trailing) {
+      url = url.slice(0, -1);
+    } else if (!hasTrailing && trailing) {
+      url += "/";
+    }
+  }
+
+  /**
+   * Collapse consecutive slashes to a single slash, except for the `//`
+   * in URL schemes such as `https://`.
+   */
+  return url.replace(/(?<!:)\/{2,}/g, "/");
 };
 
 export { joinUrlPath };

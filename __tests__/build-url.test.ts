@@ -44,7 +44,8 @@ describe("Build Url test", () => {
   });
 
   test("Url is relative path", () => {
-    const url = buildUrl("images", {
+    const url = buildUrl({
+      path: "images",
       queryParams: {
         page: 3,
         sort: "title:desc",
@@ -52,6 +53,12 @@ describe("Build Url test", () => {
     });
 
     expect(url).toEqual("/images?page=3&sort=title%3Adesc");
+  });
+
+  test("replace with array", () => {
+    const url = buildUrl("/hello?a=1&a=2", { queryParams: { a: [3, 4] } });
+
+    expect(url).toBe("/hello?a=3&a=4");
   });
 
   test("Changes value of an existing query param", () => {
@@ -156,7 +163,7 @@ describe("joinUrlPath", () => {
     expect(joinUrlPath(["hello", 2])).toBe("hello/2");
     expect(joinUrlPath(["id", 2])).toBe("id/2");
     expect(joinUrlPath(["/id", 2])).toBe("/id/2");
-    expect(joinUrlPath(["/id", 2, ""])).toBe("/id/2/");
+    expect(joinUrlPath(["/id", 2, "/"])).toBe("/id/2/");
     expect(joinUrlPath(["/id", 2], { trailing: true })).toBe("/id/2/");
     expect(joinUrlPath(["/id", 2], { leading: true, trailing: true })).toBe(
       "/id/2/",
@@ -175,5 +182,12 @@ describe("joinUrlPath", () => {
     expect(joinUrlPath([""])).toBe("");
     expect(joinUrlPath([], { trailing: true })).toBe("/");
     expect(joinUrlPath([], { leading: true, trailing: true })).toBe("/");
+    expect(joinUrlPath(["/a/////", "", ""])).toBe("/a/");
+  });
+
+  test("http", () => {
+    expect(joinUrlPath(["http://cnn.com/abc///", "///def"])).toBe(
+      "http://cnn.com/abc/def",
+    );
   });
 });
