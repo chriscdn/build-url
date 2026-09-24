@@ -18,6 +18,9 @@
     "watch": "pnpm build --watch",
     "test": "vitest"
   },
+  "dependencies": {
+    "@chriscdn/type-guards": "^0.0.3"
+  },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.8",
     "tsdown": "0.23.0",
@@ -26,8 +29,5 @@
   },
   "files": [
     "lib"
-  ],
-  "dependencies": {
-    "@chriscdn/type-guards": "^0.0.3"
-  }
+  ]
 }
